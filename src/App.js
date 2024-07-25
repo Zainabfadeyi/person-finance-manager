@@ -4,13 +4,14 @@ import styles from './App.module.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './app/pages/Dashboard';
 import Transaction from './app/pages/Transaction';
-import Sidebar from './app/sidebar/Sidebar';
+import Sidebar from './app/sidebar/SideBar';
+
 
 const App = () => {
   return (
     <Router>
       <div className={styles.app}>
-        <Sidebar />
+        <Sidebar/>
         <main className={styles.mainContent}>
           <Routes>
             <Route path="/" element={<Dashboard />} />

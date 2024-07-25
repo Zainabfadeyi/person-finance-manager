@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './Sidebar.module.css';
 
-const Sidebar = () => {
+const SideBar = () => {
   const [isOpen, setIsOpen] = useState(true);
   const location = useLocation();
 
@@ -52,4 +52,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default SideBar;
