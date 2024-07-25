@@ -1,0 +1,130 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 250px;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.closed {
+  width: 60px;
+}
+
+.toggleButton {
+  position: absolute;
+  right: -30px;
+  top: 20px;
+  background-color: white;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  padding: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.navigation ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navItem {
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.navItem:hover {
+  background-color: #e9ecef;
+}
+
+.navItem.active {
+  background-color: #e9ecef;
+}
+
+.navItem.active .navText {
+  color: #0072BB;
+  font-weight:600;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+.navText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.closed .navText {
+  display: none;
+}
+
+.dashboardIcon { background-image: url('../../assets/icons/dashboard-icon.svg');  }
+.dashboardIconSelected { background-image: url('../../assets/icons/dashboard-selected-icon.svg');  }
+.accountIcon { background-image: url('../../assets/icons/account-icon.svg'); }
+.accountIconSelected { background-image: url('../../assets/icons/account-selected-icon.svg'); }
+.budgetIcon { 
+  background-image: url('../../assets/icons/budget-icon.svg');
+ }
+.transactionsIcon {background-image: url('../../assets/icons/transactions-icon.svg');}
+.transactionsIconSelected {background-image: url('../../assets/icons/transactions-selected-icon.svg');}
+.reportsIcon { background-image: url('../../assets/icons/reports-icon.svg'); }
+.settingsIcon { background-image: url('../../assets/icons/settings-icon.svg'); }
+.logoutIcon { background-image: url('../../assets/icons/logout-icon.svg'); }
+
+.bottomSection {
+  margin-top: auto;
+  padding: 20px;
+}
+
+.settingsLink, .logoutLink {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.settingsLink:hover, .logoutLink:hover {
+  color: #007bff;
+}
+
+.closed .bottomSection {
+  padding: 20px 0;
+}
+
+.closed .navItem {
+  padding: 15px 0;
+  justify-content: center;
+}
+
+.closed .icon {
+  margin-right: 0;
+}
