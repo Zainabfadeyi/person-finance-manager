@@ -1,10 +1,11 @@
 import React from 'react'
-import Progress from '../component/mainpage/Progress'
+import TanStackTable from '../component/mainpage/TanStackTable'
+
 
 const transaction = () => {
   return (
     <div>
-     transaction
+      <TanStackTable/>
     </div>
   )
 }
