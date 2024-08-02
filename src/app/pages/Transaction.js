@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import ExpenseModal from '../Components/ExpenseModal';
+import React from 'react'
+import TanStackTable from '../component/mainpage/TanStackTable'
+
 
 const Transaction = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,14 +15,9 @@ const Transaction = () => {
 
   return (
     <div>
-      <button onClick={openModal}>Add Transaction</button>
-      <ExpenseModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        onAdd={handleAddExpense}
-      />
+      <TanStackTable/>
     </div>
-  );
-};
+  )
+}
 
 export default Transaction;
