@@ -1,5 +1,5 @@
 .sidebar {
-  position: fixed;
+  /* position: fixed; */
   left: 0;
   top: 0;
   bottom: 0;
@@ -16,7 +16,6 @@
 }
 
 .toggleButton {
-  position: absolute;
   right: -30px;
   top: 20px;
   background-color: white;
@@ -25,6 +24,13 @@
   padding: 10px;
   cursor: pointer;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+.navLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  width: 100%;
 }
 
 .logo {
@@ -42,6 +48,8 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+  justify-content: center;
+  margin-left: 10px;
 }
 
 .navItem {
@@ -110,6 +118,8 @@
   align-items: center;
   padding: 10px 0;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
 }
 
 .settingsLink:hover, .logoutLink:hover {

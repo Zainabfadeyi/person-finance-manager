@@ -6,21 +6,24 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DebouncedInput from "./DebouncedInput";
 import { CiSearch } from "react-icons/ci";
 import styles from "../../../styles/table.module.css";
-import { TRANSACTIONS } from "../../data";
+import { useFetchTransactions } from "../../../api/apiFolder/tableApi";
+import { useSelector } from "../../../api/hook";
 
 const TanStackTable = () => {
+  const { fetchTransactions } = useFetchTransactions();
   const columnHelper = createColumnHelper();
+  const userId = useSelector((state) => state.auth.user?.id);
 
   const columns = [
-    columnHelper.accessor("transactionDate", {
+    columnHelper.accessor("transaction_date", { // Adjusted to match API response
       header: "Transaction Date",
       cell: (info) => <span>{info.getValue()}</span>,
     }),
-    columnHelper.accessor("transactionId", {
+    columnHelper.accessor("id", { // Adjusted to match API response
       header: "Transaction ID",
       cell: (info) => <span>{info.getValue()}</span>,
     }),
@@ -28,9 +31,17 @@ const TanStackTable = () => {
       header: "Description",
       cell: (info) => <span>{info.getValue()}</span>,
     }),
+    // columnHelper.accessor("amount", {
+    //   header: "Amount",
+    //   cell: (info) => <span>{info.getValue().toFixed(2)}</span>,
+    // }),
     columnHelper.accessor("amount", {
       header: "Amount",
-      cell: (info) => <span>${info.getValue().toFixed(2)}</span>,
+      cell: (info) => {
+        const value = info.getValue();
+        const amount = parseFloat(value);
+        return <span>${isNaN(amount) ? '0.00' : amount.toFixed(2)}</span>; // Default to '0.00' if NaN
+      },
     }),
     columnHelper.accessor("category", {
       header: "Category",
@@ -47,8 +58,20 @@ const TanStackTable = () => {
     }),
   ];
 
-  const [data] = useState(() => [...TRANSACTIONS]);
+  const [data, setData] = useState([]);
   const [globalFilter, setGlobalFilter] = useState("");
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const transactions = await fetchTransactions(userId); 
+        setData(transactions); 
+      } catch (error) {
+        console.error("Failed to fetch transactions", error);
+      }
+    };
+    getData();
+  }, []); // Fetch data whenever userId changes
 
   const table = useReactTable({
     data,
@@ -60,7 +83,6 @@ const TanStackTable = () => {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
-
   return (
     <div className={styles.tableContainer}>
       <div className={styles.tableHeader}>

@@ -14,6 +14,7 @@ const Transaction = () => {
     // Handle the new expense data (e.g., update state, send to API, etc.)
   };
 
+
   return (
     <div>
       <TanStackTable/>
