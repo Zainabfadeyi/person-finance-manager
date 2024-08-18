@@ -6,24 +6,26 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DebouncedInput from "./DebouncedInput";
 import { CiSearch } from "react-icons/ci";
 import styles from "../../../styles/table.module.css";
-import { TRANSACTIONS } from "../../mockData";
 import ActionsDropdown from "./ActionDropdown";
+import { useFetchTransactions } from "../../../api/apiFolder/tableApi";
+import { useSelector } from "../../../api/hook";
 
 
 
 const TanStackTable = () => {
+  const { fetchTransactions } = useFetchTransactions();
   const columnHelper = createColumnHelper();
-  
+  const userId = useSelector((state) => state.auth.user?.id);
 const columns = [
-  columnHelper.accessor("transactionDate", {
+  columnHelper.accessor("transaction_date", {
     header: "Transaction Date",
     cell: (info) => <span>{info.getValue()}</span>,
   }),
-  columnHelper.accessor("transactionId", {
+  columnHelper.accessor("id", {
     header: "Transaction ID",
     cell: (info) => <span>{info.getValue()}</span>,
   }),
@@ -33,7 +35,11 @@ const columns = [
   }),
   columnHelper.accessor("amount", {
     header: "Amount",
-    cell: (info) => <span>${info.getValue().toFixed(2)}</span>,
+    cell: (info) => {
+      const value = info.getValue();
+      const amount = parseFloat(value);
+      return <span>${isNaN(amount) ? '0.00' : amount.toFixed(2)}</span>; // Default to '0.00' if NaN
+    },
   }),
   columnHelper.accessor("category", {
     header: "Category",
@@ -62,8 +68,20 @@ const columns = [
   }),
 ];
 
-const [data , setData] = useState(() => [...TRANSACTIONS]);
+const [data, setData] = useState([]);
 const [globalFilter, setGlobalFilter] = useState("");
+
+useEffect(() => {
+  const getData = async () => {
+    try {
+      const transactions = await fetchTransactions(); 
+      setData(transactions); 
+    } catch (error) {
+      console.error("Failed to fetch transactions", error);
+    }
+  };
+  getData();
+}, [userId]);
 
 const table = useReactTable({
   data,

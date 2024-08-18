@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import styles from '../../../styles/table.module.css';
 
 const DebouncedInput = ({
   value: initValue,
@@ -25,6 +25,8 @@ const DebouncedInput = ({
       {...props}
       value={value}
       onChange={(e) => setValue(e.target.value)}
+      className={styles.debouncedInput}
+      placeholder="search for transactions..."
     />
   );
 };
