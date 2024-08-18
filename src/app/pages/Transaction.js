@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react';
 import TanStackTable from '../component/mainpage/TanStackTable'
+import AddModal from '../../'
 
 
 const Transaction = () => {
