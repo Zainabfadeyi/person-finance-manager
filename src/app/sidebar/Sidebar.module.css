@@ -3,12 +3,11 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 250px;
+  width: 230px;
   background-color: white;
   transition: all 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .closed {
@@ -25,13 +24,13 @@
   cursor: pointer;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
-.navLink {
+/* .navLink {
   display: flex;
   align-items: center;
   text-decoration: none;
   color: black;
   width: 100%;
-}
+} */
 
 .logo {
   padding: 20px;
@@ -44,7 +43,7 @@
   text-overflow: ellipsis;
 }
 
-.navigation ul {
+ .navigation ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -52,26 +51,29 @@
   margin-left: 10px;
 }
 
-.navItem {
+/* .navItem {
   padding: 15px 20px;
-  display: flex;
+  
   align-items: center;
   cursor: pointer;
   transition: background-color 0.2s;
-}
+}  */
 
-.navItem:hover {
+
+/* .navItem.active {
   background-color: #e9ecef;
-}
+} */
 
-.navItem.active {
-  background-color: #e9ecef;
-}
-
-.navItem.active .navText {
+/* .navItem.active .navText {
   color: #0072BB;
   font-weight:600;
-}
+} */
+/* .navItem.active .navText,
+.navItem.active .icon {
+  color: #0072BB;
+  font-weight: 600;
+} */
+
 
 .icon {
   width: 20px;
@@ -85,6 +87,7 @@
   mask-position: center;
 }
 
+
 .navText {
   white-space: nowrap;
   overflow: hidden;
@@ -94,19 +97,6 @@
 .closed .navText {
   display: none;
 }
-
-.dashboardIcon { background-image: url('../../assets/icons/dashboard-icon.svg');  }
-.dashboardIconSelected { background-image: url('../../assets/icons/dashboard-selected-icon.svg');  }
-.accountIcon { background-image: url('../../assets/icons/account-icon.svg'); }
-.accountIconSelected { background-image: url('../../assets/icons/account-selected-icon.svg'); }
-.budgetIcon { 
-  background-image: url('../../assets/icons/budget-icon.svg');
- }
-.transactionsIcon {background-image: url('../../assets/icons/transactions-icon.svg');}
-.transactionsIconSelected {background-image: url('../../assets/icons/transactions-selected-icon.svg');}
-.reportsIcon { background-image: url('../../assets/icons/reports-icon.svg'); }
-.settingsIcon { background-image: url('../../assets/icons/settings-icon.svg'); }
-.logoutIcon { background-image: url('../../assets/icons/logout-icon.svg'); }
 
 .bottomSection {
   margin-top: auto;
@@ -138,3 +128,25 @@
 .closed .icon {
   margin-right: 0;
 }
+
+.sidebarWrap {
+  width: 100%;
+} 
+  
+.navIconClose {
+  margin-left: 2rem;
+  font-size: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+ 
+}
+
+.sidebarItem:hover{
+  background: #252831;
+    border-left: 3px solid #632ce4;
+    cursor: pointer;
+    color: #f5f5f5;
+}
+

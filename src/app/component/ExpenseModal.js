@@ -3,9 +3,9 @@ import styles from '../../styles/ExpenseModal.module.css';
 
 const ExpenseModal = ({ isOpen, onClose, onAdd }) => {
   const [amount, setAmount] = useState('');
-  const [date, setDate] = useState('');
+  const [transaction_date, setDate] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('expense');
+  const [category, setCategory] = useState('Income'); // Default type
 
   const handleAmountChange = (value) => {
     setAmount(value);
@@ -13,7 +13,14 @@ const ExpenseModal = ({ isOpen, onClose, onAdd }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAdd({ amount, date, description, category });
+    const transactionType = category === 'Income' ? 'Income' : 'Expenses';
+    onAdd({ 
+        amount, 
+        transaction_date, 
+        description, 
+        category, 
+        transaction_type: transactionType 
+    });
     onClose();
   };
 
@@ -48,13 +55,14 @@ const ExpenseModal = ({ isOpen, onClose, onAdd }) => {
               ))}
             </div>
           </div>
-          <div cassName={styles.row}>
+
+          <div className={styles.row}>
             <div className={`${styles.formGroup} ${styles.rowChild}`}>
               <label className={styles.label} htmlFor="date">Date</label>
               <input
                 type="date"
                 id="date"
-                value={date}
+                value={transaction_date}
                 onChange={(e) => setDate(e.target.value)}
                 className={styles.input}
               />
@@ -73,24 +81,21 @@ const ExpenseModal = ({ isOpen, onClose, onAdd }) => {
           </div>
 
           <div className={styles.formGroup}>
-            <label className={styles.label}>Category</label>
-            <div className={styles.categoryButtons}>
-              <button
-                type="button"
-                onClick={() => setCategory('income')}
-                className={`${styles.categoryButtonIncome} ${category === 'income' ? styles.active : ''}`}
-              >
-                Income
-              </button>
-              <button
-                type="button"
-                onClick={() => setCategory('expense')}
-                className={`${styles.categoryButtonExpense} ${category === 'expense' ? styles.active : ''}`}
-              >
-                Expense
-              </button>
-            </div>
+            <label className={styles.label}>Expense Type</label>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className={styles.input}
+            >
+              <option value="Income">Income</option>
+              <option value="Groceries">Groceries</option>
+              <option value="Utilities">Utilities</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Travel">Travel</option>
+              <option value="Miscellaneous">Miscellaneous</option>
+            </select>
           </div>
+
           <button type="submit" className={styles.addButton}>Add</button>
         </form>
       </div>

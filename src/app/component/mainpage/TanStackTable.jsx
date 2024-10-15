@@ -22,13 +22,10 @@ const TanStackTable = () => {
   const userId = useSelector((state) => state.auth.user?.id);
 const columns = [
   columnHelper.accessor("transaction_date", {
-    header: "Transaction Date",
+    header: "Date",
     cell: (info) => <span>{info.getValue()}</span>,
   }),
-  columnHelper.accessor("id", {
-    header: "Transaction ID",
-    cell: (info) => <span>{info.getValue()}</span>,
-  }),
+  
   columnHelper.accessor("description", {
     header: "Description",
     cell: (info) => <span>{info.getValue()}</span>,
@@ -71,7 +68,7 @@ const columns = [
 const [data, setData] = useState([]);
 const [globalFilter, setGlobalFilter] = useState("");
 
-useEffect(() => {
+
   const getData = async () => {
     try {
       const transactions = await fetchTransactions(); 
@@ -80,8 +77,9 @@ useEffect(() => {
       console.error("Failed to fetch transactions", error);
     }
   };
+  useEffect(() => {
   getData();
-}, [userId]);
+}, []);
 
 const table = useReactTable({
   data,
@@ -115,7 +113,7 @@ return (
     <div className={styles.tableContainer}>
       <div className={styles.tableHeader}>
         <div className={styles.searchContainer}>
-          <CiSearch />
+          {/* <CiSearch /> */}
           <DebouncedInput
             value={globalFilter ?? ""}
             onChange={(value) => setGlobalFilter(String(value))}

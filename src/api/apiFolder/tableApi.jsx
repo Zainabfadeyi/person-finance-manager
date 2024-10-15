@@ -24,15 +24,3 @@ export const useFetchTransactions = () => {
   return { fetchTransactions };
 };
 
-// // You can also add functions for creating, updating, and deleting transactions
-// export const createTransaction = async (transactionData) => {
-//   try {
-//     const response = await axios.post(API_BASE_URL, transactionData);
-//     return response.data;
-//   } catch (error) {
-//     console.error("Error creating transaction:", error);
-//     throw error;
-//   }
-// };
-
-// Add more functions as needed...

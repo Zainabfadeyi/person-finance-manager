@@ -37,7 +37,7 @@ const Progress = () => {
     Miscellaneous: 0,
   });
 
-  useEffect(() => {
+
     const fetchData = async () => {
       try {
         const transactions = await fetchTransactions(); // Fetch transactions from the API
@@ -47,14 +47,15 @@ const Progress = () => {
         console.error('Error fetching transactions:', error);
       }
     };
+      useEffect(() => {
     fetchData();
-  }, [fetchTransactions]); // Dependency array includes fetchTransactions
+  }, []); 
 
   const totalAmount = Object.values(categoryTotals).reduce((acc, val) => acc + val, 0); 
 
   return (
     <div className={styles.progress}>
-      <div style={{ fontSize: "19px", fontWeight: "800" }}>Category Status</div>
+      <div style={{ fontSize: "20px", fontWeight: "700" ,color:"#1F2C73"}}>Monthly Budgets</div>
       {Object.keys(categoryTotals).map((category, index) => {
         const percentage = totalAmount > 0 ? (categoryTotals[category] / totalAmount) * 100 : 0; 
         return (
@@ -66,7 +67,7 @@ const Progress = () => {
             <div className={styles.bar}>
               <ProgressBar
                 now={percentage}
-                style={{ height: '20px' }}
+                style={{ height: '12px' }}
                 className={styles.progressBar}
               />
             </div>

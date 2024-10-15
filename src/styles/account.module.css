@@ -1,3 +1,46 @@
+.first{
+    width: 100%;
+    column-gap: 15px;
+    box-shadow: 0 0 2px 0 rgba(145, 158, 171, .3), 0 12px 24px -4px rgba(145, 158, 171, .12);
+    border: 1px solid #e5e5e5;
+    
+    padding: 15px;
+    background-color: #fff; 
+    display: flex;
+   
+    
+}
+.TopContainer{
+    display: flex;   
+    width: 100%;
+    column-gap: 15px;
+}
+.second{
+    width: 100%;
+    column-gap: 10px;
+    box-shadow: 0 0 2px 0 rgba(145, 158, 171, .3), 0 12px 24px -4px rgba(145, 158, 171, .12);
+   
+    border: 1px solid #e5e5e5;
+    padding: 10px;
+    justify-content: center;
+    display: flex;
+    background-color: #fff;
+
+}
+.icon{
+    color: white;
+    padding: 10px;
+    height: 45px;
+    border-radius: 30px;
+    font-size: 25px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
 .Footer{
     width: 100%;
     padding: 10px;
@@ -49,4 +92,11 @@
 .planned{
     display: flex;
     justify-content: center;
+}
+.Analytics{
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    margin-left: 10px;
+    
 }

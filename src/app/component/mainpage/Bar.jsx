@@ -3,35 +3,33 @@ import { ResponsiveBar } from '@nivo/bar';
 import { useFetchTransactions } from '../../../api/apiFolder/tableApi';
 import styles from "../../../styles/dashboard.module.css";
 
-// Function to group data by month and categorize as income and expenses
+
 const groupDataByMonth = (transactions) => {
   const groupedData = [];
   const currentDate = new Date();
 
-  // Get the last four months
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 12; i++) {
     const monthDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, 1);
     const monthName = monthDate.toLocaleString('default', { month: 'long' });
     const year = monthDate.getFullYear();
 
-    // Initialize income and expenses for each month
-    groupedData.push({ month: `${monthName} ${year}`, income: 0, expenses: 0 });
+
+    groupedData.push({ month: `${monthName} `, income: 0, expenses: 0 });
   }
 
   transactions.forEach((transaction) => {
     const transactionDate = new Date(transaction.transaction_date);
     const month = transactionDate.toLocaleString('default', { month: 'long' });
     const year = transactionDate.getFullYear();
-    const monthYear = `${month} ${year}`;
+    const monthYear = `${month} `;
 
-    // Find the corresponding month in the groupedData array
     const monthIndex = groupedData.findIndex((item) => item.month === monthYear);
     if (monthIndex !== -1) {
-      // Use transaction_type to categorize as income or expenses
+
       if (transaction.transaction_type === "Income") {
-        groupedData[monthIndex].income += transaction.amount;
+        groupedData[monthIndex].income += Number(transaction.amount); // Convert to number
       } else if (transaction.transaction_type === "Expenses") {
-        groupedData[monthIndex].expenses += Math.abs(transaction.amount); // Make sure expenses are positive
+        groupedData[monthIndex].expenses += Number(transaction.amount); // Convert to number
       }
     }
   });
@@ -43,34 +41,37 @@ const Bar = () => {
   const { fetchTransactions } = useFetchTransactions();
   const [barChartData, setBarChartData] = useState([]);
 
-  useEffect(() => {
+ 
     const fetchData = async () => {
       try {
         const transactions = await fetchTransactions(); 
-        const groupedData = groupDataByMonth(transactions); // Group data by month
+        const groupedData = groupDataByMonth(transactions); 
         setBarChartData(groupedData); 
       } catch (error) {
         console.error('Error fetching transactions:', error);
       }
     };
+
+     useEffect(() => {
+
     fetchData();
-  }, [fetchTransactions]); 
+  }, []); 
 
   return (
     <div className={styles.barContainer}>
+      <div style={{fontSize: "20px", fontWeight: "700" ,color:"#1F2C73"}}>Monthly Income vs Expenses</div>
       <div style={{ height: "380px", transformOrigin: "center" }}>
         <ResponsiveBar
           data={barChartData}
           keys={["income", "expenses"]}
           indexBy="month"
-          margin={{ top: 50, right: 100, bottom: 70, left: 90 }}
+          margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
           borderWidth={2}
-          padding={0.8}
+          padding={0.4}
           groupMode="grouped"
           valueScale={{ type: "linear" }}
           indexScale={{ type: "band", round: true }}
-          colors={["#0072BB", "#909090"]} 
-          borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+          colors={["#0703E9", "#D5D5F7"]} 
           borderRadius={0}
           axisTop={null}
           axisRight={null}
